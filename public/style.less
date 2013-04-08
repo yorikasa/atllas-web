@@ -1,0 +1,114 @@
+@import "less/variables.less";
+
+// Mixins
+.mixin-navbar(@color){
+	border-bottom: 5px solid @color;
+}
+.mixin-entry(@color){
+	border-left: 5px solid @color;
+}
+
+body{
+	
+}
+
+div{
+	word-break:break-all;
+}
+.brandimg{
+	margin-right: 20px;
+}
+
+.nav{
+	.society{.mixin-navbar(@society);}
+	.politic{.mixin-navbar(@politic);}
+	.sport{.mixin-navbar(@sport);}
+	.entertainment{.mixin-navbar(@entertainment);}
+	.tech{.mixin-navbar(@tech);}
+	.fun{.mixin-navbar(@fun);}
+}
+
+.divider{
+	border-left: 1px solid @grayLighter;
+}
+
+.container{
+	.row{
+		margin-top: 30px;
+		.top.ad{
+			width: 728px;
+			height: 90px;
+			margin: 40px auto 20px auto;
+		}
+
+		.section{
+			margin: 10px 0 20px 0;
+			span.section-title{
+				margin: 0px 0 20px 0;
+				padding: 6px 10px;
+				font-size: 13px;
+				font-weight: bold;
+				color: white;
+				display: inline-block;
+			}
+			.entry{
+				padding: 10px 5px 10px 10px;
+				border-bottom: 1px solid @grayLighter;
+				h1{
+					 font-weight: bold;
+					 font-size: 16px;
+					 line-height: 22px;
+				}
+				h2{
+					font-weight: bold;
+					font-size: 13px;
+					line-height: 18px;
+					a{color: #444444;}
+				}
+				p{
+					color: @gray;
+				}
+				span{
+					color: @grayLight;
+					font-size: 12px;
+					margin-right: 5px;
+				}
+			}
+			.society{.mixin-entry(@society);}
+			.politic{.mixin-entry(@politic);}
+			.sport{.mixin-entry(@sport);}
+			.entertainment{.mixin-entry(@entertainment);}
+			.tech{.mixin-entry(@tech);}
+			.fun{.mixin-entry(@fun);}
+		}
+		#recents{
+			span.section-title{ background-color: red; }
+		}
+		#popular{
+			span.section-title{ background-color: @blueDark; }
+		}
+		#apps{
+			span.section-title{ background-color: gray; }
+		}
+		#products{
+			span.section-title{ background-color: orange; }
+		}
+		#videos{
+			span.section-title{ background-color: purple; }
+		}
+	}
+}
+
+.share{
+	padding-top: 10px;
+	div{
+		margin: 10px 0;
+	}
+}
+
+@media (max-width: 767px) {
+	.row{
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+}
