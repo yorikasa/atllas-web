@@ -13,6 +13,7 @@ class Url
     field :url, type: String
     field :image_url, type: String
     field :title, type: String
+    field :title_array, type: Array
     field :body, type: String
     field :category, type: String
 
@@ -132,14 +133,14 @@ get '/page/:id' do
     @related = []
     @nears = []
     if ttime = target[:created_at]
-        Url.where(created_at: (ttime-3600*5..ttime+3600*5)).desc(:count_all_twitter).each do |url|
+        Url.where(created_at: (ttime-3600*7..ttime+3600*7)).desc(:count_all_twitter).each do |url|
             next if target.id == url.id
             # next if not url[:counted_twitter]
             # next if not url[:count_all_hatena]
-            next if (0 < url[:counting_twitter]) and (url[:counting_twitter] < 5)
+            # next if (0 < url[:counting_twitter]) and (url[:counting_twitter] < 5)
             # next if url.count_all_twitter < 10
             # next if url.count_all_hatena < 5
-            if sim(target.title, url.title) > 0.3
+            if sim(target, url) > 0.3
                 @related << url
             else
                 @nears << url

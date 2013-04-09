@@ -35,6 +35,7 @@ end
 
 
 def atoh(array)
+    return nil if not array
     hash = Hash.new(0)
     array.each do |e|
         hash[e] += 1
@@ -43,6 +44,7 @@ def atoh(array)
 end
 
 def normalize(hash)
+    return nil if not hash
     norm = 0.0
     hash.each do |word, freq|
         norm += freq.to_f**2
@@ -54,7 +56,7 @@ def normalize(hash)
 end
 
 def cosine_sim(doc1, doc2)
-    0 if not doc1 and not doc2
+    return 0 if (not doc1) or (not doc2)
 
     similarity = 0.0
     doc1.each do |term, freq|
@@ -71,13 +73,13 @@ def cosine_sim(doc1, doc2)
 #     -1
 end
 
-def sim(string1, string2)
+def sim(url1, url2)
     # normalize(atoh(string1.split('')))
     # normalize(atoh(string1.split('')))
     # 0
     # string1.split('')
     # string2.split('')
     # 0
-    cosine_sim(normalize(atoh(nouns(string1))), normalize(atoh(nouns(string2))))
+    cosine_sim(normalize(atoh(url1.title_array)), normalize(atoh(url2.title_array)))
     #2 cosine_sim(normalize(atoh(string1.split(''))), normalize(atoh(string2.split(''))))
 end

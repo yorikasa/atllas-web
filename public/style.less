@@ -72,8 +72,13 @@ div{
 					color: @grayLight;
 					font-size: 12px;
 					margin-right: 5px;
+                    visibility: hidden;
 				}
+				span a{color: @grayLight;}
 			}
+            .entry:hover span{
+                visibility: visible;  
+            }
 			.society{.mixin-entry(@society);}
 			.politic{.mixin-entry(@politic);}
 			.sport{.mixin-entry(@sport);}
