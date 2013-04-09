@@ -44,11 +44,11 @@ div{
 		.section{
 			margin: 10px 0 20px 0;
 			span.section-title{
-				margin: 0px 0 20px 0;
-				padding: 6px 10px;
-				font-size: 13px;
-				font-weight: bold;
-				color: white;
+				margin: 0px 0px 10px 0;
+				padding: 6px 10px 6px 0px;
+				font-size: 20px;
+				font-weight: normal;
+				color: @gray;
 				display: inline-block;
 			}
 			.entry{
@@ -85,21 +85,6 @@ div{
 			.entertainment{.mixin-entry(@entertainment);}
 			.tech{.mixin-entry(@tech);}
 			.fun{.mixin-entry(@fun);}
-		}
-		#recents{
-			span.section-title{ background-color: red; }
-		}
-		#popular{
-			span.section-title{ background-color: @blueDark; }
-		}
-		#apps{
-			span.section-title{ background-color: gray; }
-		}
-		#products{
-			span.section-title{ background-color: orange; }
-		}
-		#videos{
-			span.section-title{ background-color: purple; }
 		}
 	}
 }

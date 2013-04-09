@@ -84,6 +84,12 @@ get '/' do
 end
 
 get '/:cat' do
+    @categories = {society: "社会",
+        politic: "政治経済",
+        sport: "スポーツ",
+        entertainment: "エンタメ",
+        tech: "テクノロジー",
+        fun: "2ch・おもしろ"}
     @urls = []
     @recents = []
     @video = []
@@ -125,7 +131,7 @@ get '/:cat' do
         count += 1
         @recents << url if count < 30
     end
-    erb :category, :locals => {cat_name: params[:cat]}
+    erb :category, :locals => {cat_en: params[:cat], cat_ja: @categories[params[:cat].to_sym]}
 end
 
 get '/page/:id' do
