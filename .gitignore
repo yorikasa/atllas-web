@@ -1,3 +1,4 @@
 .env
 .ruby-version
 mongoid.yml
+.DS_Store
