@@ -27,8 +27,15 @@
 	  <% end %>
 	</div>
   </div>
-  <%= erb :ad336 %>
-  <%= erb :ad320 %>
+  <% if device == "smartphone" %>
+  	<div style="width:320px;height:50px;">
+  		<%= erb :ad320 %>
+  	</div>
+  <% else %>
+  	<div style="width:336px;height:280px;margin:10px 0;">
+  		<%= erb :ad336 %>
+  	</div>
+  <% end %>
 </div> <!-- .span6 -->
 
 <div class="span2">
@@ -51,7 +58,7 @@
 	<% unless @nears.empty? %>
 	<span class="section-title"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %>のニュース</span>
 	<% end %>
-	<% rpoint = rand(1..10) %>
+	<% rpoint = rand(0..5) %>
 	<% @nears[0,15].each_with_index do |url, i| %>
 	  <% if url.title %>
 	    <div class="entry <%= url.category.downcase if url.category %>">
@@ -59,7 +66,11 @@
 		</div>
 	  <% end %>
 	  <% if i == rpoint %>
-	    <%= erb :ad300 %>
+	    <% if device == 'desktop' %>
+	    	<div style="width:300px;height:250px; margin:10px 0;">
+	    		<%= erb :ad300 %>
+	    	</div>
+	    <% end %>
 	  <% end %>
 	<% end %>
   </div>

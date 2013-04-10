@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <title><%= title %></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet/less" type="text/css" href="/less/bootstrap.less" />
 	<link rel="stylesheet/less" type="text/css" href="/less/responsive.less" />
 	<link rel="stylesheet/less" type="text/css" href="/style.less" />
@@ -34,7 +34,10 @@
 	  </div> <!-- .navbar .navbar-fixed-top -->
 
 	  <div class="row">
-		<div class="top ad hidden-phone">
+		<% if device == "smartphone" %>
+		  <%= erb :ad320 %>
+		<% else %>
+		<div class="top ad">
 		  <script type="text/javascript"><!--
 			google_ad_client = "ca-pub-1794767457980402";
 			/* Top */
@@ -46,5 +49,5 @@
 		  <script type="text/javascript"
 				  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		  </script>
-		</div> <!-- .top .ad .hidden-phone -->
-		<%= erb :ad320 %>
+		</div> <!-- .top .ad -->
+		<% end %>

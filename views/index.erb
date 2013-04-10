@@ -12,26 +12,40 @@
 	     # 一方12時間ではtwitterの方は60くらいが上限なのでそんな感じ
 	     u.counted_twitter + u.count_all_hatena/5
 	   end
-	   }.reverse.each do |url| %>
-	<% if url.title %>
-	<div class="entry <%= url.category.downcase %>">
-	  <h1><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h1>
-	  <p><%= url.body[0,100] if url.body %>...</p>
-	  <span class="pull-right"><a href="/page/<%= url.id %>">Permalink</a></span>
-	  <span><a href="https://twitter.com/share?url=<%= url.url %>" target="_blank">ツイートする</a></span>
-	  <!-- <span><%= url.counted_twitter %></span> -->
-	  <!-- <span><%= url.count_all_hatena if url.count_all_hatena %></span> -->
-	</div>
-	<% end %>
+	   }.reverse.each_with_index do |url, i| %>
+	  <% if url.title %>
+	    <div class="entry <%= url.category.downcase %>">
+		  <h1><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h1>
+		  <p><%= url.body[0,100] if url.body %>...</p>
+		  <span><a href="/page/<%= url.id %>"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></a></span>
+		</div> <!-- .entry -->
+		<% if i == 5 %>
+			<% if device == "smartphone" %>
+				<div style="width:320px;height:50px;">
+					<%= erb :ad320 %>
+				</div>
+			<% else %>
+				<div style="width:336px;height:280px;margin:10px 0;">
+					<%= erb :ad336 %>
+				</div>
+			<% end %>
+		<% end %>
+	  <% end %>
 	<% end %>
   </div>
   <% end %>
 </div> <!-- .span6 -->
 
+<% if device == "smartphone" %>
+  <div style="width:300px; margin: 3px auto;">
+	<%= erb :ad300 %>
+  </div>
+<% end %>
+
 <div class="span4">
   <div id="recents" class="section">
 	<span class="section-title">最新ニュース</span>
-	<% rpoint = rand(1..10) %>
+	<% rpoint = rand(0..5) %>
 	  <% @recents.each_with_index do |url, i| %>
 	    <% if url.title %>
 		  <div class="entry <%= url.category.downcase %>">
@@ -39,7 +53,11 @@
 		  </div>
 		<% end %>
 	  <% if i == rpoint %>
-	    <%= erb :ad300 %>
+	    <% if device == 'desktop' %>
+	    	<div style="width:300px;height:250px; margin:10px 0;">
+	    		<%= erb :ad300 %>
+	    	</div>
+	    <% end %>
 	  <% end %>
 	<% end %>
   </div>

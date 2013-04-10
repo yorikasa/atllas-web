@@ -83,3 +83,14 @@ def sim(url1, url2)
     cosine_sim(normalize(atoh(url1.title_array)), normalize(atoh(url2.title_array)))
     #2 cosine_sim(normalize(atoh(string1.split(''))), normalize(atoh(string2.split(''))))
 end
+
+def device
+    ua = request.env['HTTP_USER_AGENT'].downcase
+    if /ipad|tablet/ =~ ua
+        return 'tablet'
+    elsif /iphone|mobile/ =~ ua
+        return 'smartphone'
+    else
+        return 'desktop'
+    end
+end
