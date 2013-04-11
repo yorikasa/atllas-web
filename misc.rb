@@ -94,3 +94,28 @@ def device
         return 'desktop'
     end
 end
+
+def tweet_links(tweet)
+    return nil if not tweet['entities']
+
+    links = []
+    tweet['entities']['hashtags'].each do |tag|
+        links << {
+            find: "##{tag['text']}",
+            replace: "<a href='http://twitter.com/search?q="+CGI.escape("##{tag['text']}")+"'>##{tag['text']}</a>"
+        }
+    end
+    tweet['entities']['urls'].each do |url|
+        links << {
+            find: url['url'],
+            replace: "<a href='#{url['expanded_url']}'>#{url['display_url']}</a>"
+        }
+    end
+    tweet['entities']['user_mentions'].each do |user|
+        links << {
+            find: "@#{user['screen_name']}",
+            replace: "<a href='http://twitter.com/#{user['screen_name']}'>@#{user['screen_name']}</a>"
+        }
+    end
+    links
+end
