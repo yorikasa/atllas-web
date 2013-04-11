@@ -4,6 +4,8 @@
 require 'sinatra'
 require 'mongoid'
 require 'benchmark'
+require 'time'
+require 'cgi'
 
 require './configure'
 require './misc'
@@ -18,7 +20,7 @@ class Url
     field :category, type: String
 
     # Twitterでの言及数を数える
-    field :timestamps_twitter, type: Array
+    field :tweets, type: Array
     field :counting_twitter, type: Integer
     field :counted_twitter, type: Integer
     field :count_all_twitter, type: Integer

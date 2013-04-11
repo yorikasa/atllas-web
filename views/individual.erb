@@ -12,7 +12,7 @@
 
 <div class="span6">
   <div class="section">
-	<div class="entry <%= url.category.downcase %>">
+	<div class="entry <%= url.category.downcase if url.category %>">
 	  <h1><a href="<%= url.url %>"><%= url.title %></a></h1>
 	  <p><%= url.body[0,250] if url.body %>...</p>
 	  <span><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></span>
@@ -34,6 +34,56 @@
   <% else %>
   	<div style="width:336px;height:280px;margin:10px 0;">
   		<%= erb :ad336 %>
+  	</div>
+  <% end %>
+  <% if url.tweets %>
+  	<div class="twitter-comments section">
+  		<span class="section-title twitter">Twitterのコメント</span>
+  		<% url.tweets.reverse[0,30].each do |tweet| %>
+  			<div class="tweet">
+  				<% if tweet['retweeted_status'] %>
+  					<% original_user = tweet['user'] %>
+  					<% tweet = tweet['retweeted_status']  %>
+  				<% end %>
+  				<div class="profile-image">
+  					<a href="http://twitter.com/<%= tweet['user']['screen_name'] %>"><img src="<%= tweet['user']['profile_image_url'] %>"></a>
+  				</div>
+  				<div class="tweet-container">
+  					<div class="tweet-time pull-right">
+  						<a href="http://twitter.com/<%= tweet['user']['screen_name'] %>/status/<%= tweet['id'] %>/">
+  						<% t = Time.parse(tweet['created_at']) %>
+  						<% if (Time.now-t)/3600 > 24 %>
+  							<span><%= t.strftime('%b %-d') %></span>
+  						<% elsif (Time.now-t)/3600 >= 1 %>
+  							<span><%= ((Time.now-t)/3600).to_i %>時間前</span>
+  						<% elsif (Time.now-t)/3600 < 1 %>
+  							<span><%= ((Time.now-t)/60).to_i %>分前</span>
+  						<% end %>
+  						</a>
+  					</div>
+  					<div class="username">
+  						<span class="name"><a href="http://twitter.com/<%= tweet['user']['screen_name'] %>"><%= tweet['user']['name'] %></a></span>
+  						<span class="screen_name"><a href="http://twitter.com/<%= tweet['user']['screen_name'] %>">@<%= tweet['user']['screen_name'] %></a></span>
+  					</div>
+  					<div class="tweet-content">
+  						<% tweet_links(tweet).each do |link| %>
+  							<% tweet['text'].gsub!(link[:find],link[:replace]) %>
+  						<% end %>
+  						<p><%= tweet['text'] %></p>
+  					</div>
+  					<% if original_user %>
+  						<div class="tweet-retweet">
+  							<span>Retweeted by <a href="http://twitter.com/<%= original_user['screen_name'] %>"><%= original_user['screen_name'] %></a></span>
+  						</div>
+  					<% end %>
+  					<div class="tweet-meta">
+  						<span class="reply"><a href="https://twitter.com/intent/tweet?in_reply_to=<%= tweet['id'] %>">返信</a></span>
+  						<span class="retweet"><a href="https://twitter.com/intent/retweet?tweet_id=<%= tweet['id'] %>">リツイート</a></span>
+  						<span class="favorite"><a href="https://twitter.com/intent/favorite?tweet_id=<%= tweet['id'] %>">お気に入りに登録</a></span>
+  					</div>
+  				</div>
+  			</div>
+  		<% end %>
   	</div>
   <% end %>
 </div> <!-- .span6 -->
