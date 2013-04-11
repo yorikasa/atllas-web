@@ -141,7 +141,7 @@ get '/:cat' do
 end
 
 get '/page/:url' do
-    target = Url.where(url: CGI.unescape(params[:url])).first
+    target = Url.where(url: CGI.unescape(CGI.unescape(params[:url]))).first
     redirect '/' if not target
     @related = []
     @nears = []
@@ -163,6 +163,3 @@ get '/page/:url' do
     erb :individual, :locals => {url: target}
 end
 
-get '/*' do
-    redirect '/'
-end
