@@ -39,12 +39,15 @@
   <% if url.tweets %>
   	<div class="twitter-comments section">
   		<span class="section-title twitter">Twitterのコメント</span>
+  		<% ids = [] %>
   		<% url.tweets.reverse[0,30].each do |tweet| %>
+  			<% if tweet['retweeted_status'] %>
+  				<% original_user = tweet['user'] %>
+  				<% tweet = tweet['retweeted_status']  %>
+  			<% end %>
+  			<% next if ids.include?(tweet['id']) %>
+  			<% ids << tweet['id'] %>
   			<div class="tweet">
-  				<% if tweet['retweeted_status'] %>
-  					<% original_user = tweet['user'] %>
-  					<% tweet = tweet['retweeted_status']  %>
-  				<% end %>
   				<div class="profile-image">
   					<a href="http://twitter.com/<%= tweet['user']['screen_name'] %>"><img src="<%= tweet['user']['profile_image_url'] %>"></a>
   				</div>
