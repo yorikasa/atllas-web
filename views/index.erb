@@ -17,7 +17,7 @@
 	    <div class="entry <%= url.category.downcase %>">
 		  <h1><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h1>
 		  <p><%= url.body[0,100] if url.body %>...</p>
-		  <span><a href="/page/<%= url.id %>"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></a></span>
+		  <span><a href="/page/<%= CGI.escape(url.url) %>"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></a></span>
 		</div> <!-- .entry -->
 		<% if i == 5 %>
 			<% if device == "smartphone" %>

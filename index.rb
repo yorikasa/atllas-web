@@ -86,6 +86,10 @@ get '/' do
 end
 
 get '/:cat' do
+    if not %w(society politic sport entertainment tech fun).include?(params[:cat])
+        redirect '/'
+    end
+    
     @categories = {society: "社会",
         politic: "政治経済",
         sport: "スポーツ",
@@ -136,8 +140,9 @@ get '/:cat' do
     erb :category, :locals => {cat_en: params[:cat], cat_ja: @categories[params[:cat].to_sym]}
 end
 
-get '/page/:id' do
-    target = Url.where(id: params[:id]).first
+get '/page/:url' do
+    target = Url.where(url: CGI.unescape(params[:url])).first
+    redirect '/' if not target
     @related = []
     @nears = []
     if ttime = target[:created_at]
@@ -156,4 +161,8 @@ get '/page/:id' do
         end
     end
     erb :individual, :locals => {url: target}
+end
+
+get '/*' do
+    redirect '/'
 end
