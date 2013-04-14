@@ -146,20 +146,20 @@ get '/page/:url' do
     @related = []
     @nears = []
     if ttime = target[:created_at]
-        Url.where(created_at: (ttime-3600*7..ttime+3600*7)).desc(:count_all_twitter).each do |url|
+        Url.where(created_at: (ttime-3600*6..ttime+3600*6)).desc(:count_all_twitter).limit(30).each do |url|
             next if target.id == url.id
-            # next if not url[:counted_twitter]
-            # next if not url[:count_all_hatena]
-            # next if (0 < url[:counting_twitter]) and (url[:counting_twitter] < 5)
-            # next if url.count_all_twitter < 10
-            # next if url.count_all_hatena < 5
-            if sim(target, url) > 0.3
-                @related << url
-            else
-                @nears << url
-            end
+            next if url.url.include?('www.nicovideo.jp')
+            @nears << url
+        end
+    end
+    if target[:related]
+        target.related.each do |rid|
+            @related << Url.where(id: rid).first
         end
     end
     erb :individual, :locals => {url: target}
 end
 
+get '/*' do
+    redirect '/'
+end
