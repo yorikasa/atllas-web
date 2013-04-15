@@ -10,7 +10,7 @@
   </head>
 
   <body data-spy="scroll" data-target=".navbar">
-    <div class="container">
+    <div class="container" style="min-height:100%;height:auto !important;height:100%;margin:0 auto -100px;">
 
 	  <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -29,25 +29,30 @@
 			  <li class="tech"><a href="/tech">テクノロジー</a></li>
 			  <li class="fun"><a href="/fun">2ch・おもしろ</a></li>
 			</ul> <!-- .nav -->
+			<!-- <ul class="nav pull-right">
+				<object data="/images/calendar.svg" type="image/svg+xml" style="width:18px;height:18px;margin-top:16px"></object>
+			</ul> -->
 		  </div> <!-- .nav-collapse .collapse -->
 		</div> <!-- .navbar-inner -->
 	  </div> <!-- .navbar .navbar-fixed-top -->
 
 	  <div class="row">
-		<% if device == "smartphone" %>
-		  <%= erb :ad320 %>
-		<% else %>
-		<div class="top ad">
-		  <script type="text/javascript"><!--
-			google_ad_client = "ca-pub-1794767457980402";
-			/* Top */
-			google_ad_slot = "3560880893";
-			google_ad_width = 728;
-			google_ad_height = 90;
-			//-->
-		  </script>
-		  <script type="text/javascript"
-				  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		  </script>
-		</div> <!-- .top .ad -->
+	  	<% if not @no_ad %>
+			<% if device == "smartphone" %>
+			  <%= erb :ad320 %>
+			<% else %>
+			<div class="top ad">
+			  <script type="text/javascript"><!--
+				google_ad_client = "ca-pub-1794767457980402";
+				/* Top */
+				google_ad_slot = "3560880893";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+			  </script>
+			  <script type="text/javascript"
+					  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			  </script>
+			</div> <!-- .top .ad -->
+			<% end %>
 		<% end %>

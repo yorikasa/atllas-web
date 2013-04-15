@@ -8,8 +8,8 @@
 	border-left: 5px solid @color;
 }
 
-body{
-	
+html,body{
+	height: 100%;
 }
 
 div{
@@ -34,11 +34,11 @@ div{
 
 .container{
 	.row{
-		margin-top: 30px;
+		margin-top: 70px;
 		.top.ad{
 			width: 728px;
 			height: 90px;
-			margin: 40px auto 20px auto;
+			margin: 0px auto 20px auto;
 		}
 
 		.section{
@@ -153,6 +153,31 @@ div{
 	padding-top: 10px;
 	div{
 		margin: 10px 0;
+	}
+}
+
+.not-found{
+	img{
+		width: 500px;
+		display: block;
+		margin: 20px auto;
+	}
+	h1{
+		font-size: 22px;
+		text-align:center;
+	}
+	p{
+		margin-top: 30px;
+		text-align: center;
+	}
+}
+
+footer{
+	height: 100px;
+	background-color: @grayLighter;
+	.footer{
+		text-align: center;
+		color: @gray;
 	}
 }
 

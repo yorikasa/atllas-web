@@ -85,9 +85,14 @@ get '/' do
     erb :index
 end
 
+get '/about' do
+    @no_ad = true
+    erb :about
+end
+
 get '/:cat' do
     if not %w(society politic sport entertainment tech fun).include?(params[:cat])
-        redirect '/'
+        redirect not_found
     end
     
     @categories = {society: "社会",
@@ -142,7 +147,7 @@ end
 
 get '/page/:url' do
     target = Url.where(url: CGI.unescape(CGI.unescape(params[:url]))).first
-    redirect '/' if not target
+    redirect not_found if not target
     @related = []
     @nears = []
     if ttime = target[:created_at]
@@ -160,6 +165,13 @@ get '/page/:url' do
     erb :individual, :locals => {url: target}
 end
 
+
 get '/*' do
-    redirect '/'
+    redirect not_found
+end
+
+
+not_found do
+    @no_ad = true
+    erb :not_found
 end

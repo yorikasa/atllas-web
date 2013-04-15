@@ -68,7 +68,7 @@
 	<span class="section-title">話題の商品</span>
 	<% @market.each do |prd| %>
 	  <% if prd.image_url %>
-	    <img src="<%= prd.image_url %>" />
+	    <a href="<%= prd.url %>" target="_blank"><img src="<%= prd.image_url %>" /></a>
 	  <% end %>
 	  <p><a href="<%= prd.url %>" target="_blank"><%= prd.title %></a></p>
 	  <hr>
