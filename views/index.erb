@@ -20,27 +20,29 @@
 		  <span><a href="/page/<%= CGI.escape(CGI.escape(url.url)) %>"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></a></span>
 		</div> <!-- .entry -->
 		<% if i == 5 %>
-			<% if device == "smartphone" %>
-				<div style="width:320px;height:50px;">
-					<%= erb :ad320 %>
-				</div>
-			<% else %>
-				<div style="width:336px;height:280px;margin:10px 0;">
-					<%= erb :ad336 %>
-				</div>
-			<% end %>
+			<script type="text/javascript"><!--
+				google_ad_client = "ca-pub-1794767457980402";
+				/* mobile */
+				if (window.innerWidth > 480) {
+					google_ad_slot = "7747074893";
+					google_ad_width = 336;
+					google_ad_height = 280;
+				} else{
+					google_ad_slot = "9524859298";
+					google_ad_width = 320;
+					google_ad_height = 50;
+				}
+				//-->
+			</script>
+			<script type="text/javascript"
+					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
 		<% end %>
 	  <% end %>
 	<% end %>
   </div>
   <% end %>
 </div> <!-- .span6 -->
-
-<% if device == "smartphone" %>
-  <div style="width:300px; margin: 3px auto;">
-	<%= erb :ad300 %>
-  </div>
-<% end %>
 
 <div class="span4">
   <div id="recents" class="section">
@@ -53,11 +55,17 @@
 		  </div>
 		<% end %>
 	  <% if i == rpoint %>
-	    <% if device == 'desktop' %>
-	    	<div style="width:300px;height:250px; margin:10px 0;">
-	    		<%= erb :ad300 %>
-	    	</div>
-	    <% end %>
+	  	  <script type="text/javascript"><!--
+	  	  	google_ad_client = "ca-pub-1794767457980402";
+	  	  	/* mobile */
+	  	  	google_ad_slot = "6409942495";
+	  	  	google_ad_width = 300;
+	  	  	google_ad_height = 250;
+	  	  	//-->
+	  	  </script>
+	  	  <script type="text/javascript"
+	  	  		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	  	  </script>
 	  <% end %>
 	<% end %>
   </div>

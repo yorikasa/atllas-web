@@ -26,7 +26,13 @@ div{
 	.entertainment{.mixin-navbar(@entertainment);}
 	.tech{.mixin-navbar(@tech);}
 	.fun{.mixin-navbar(@fun);}
+	object{
+		margin: 16px 10px auto 10px;
+		height: 18px;
+		width: 18px;
+	}
 }
+
 
 .divider{
 	border-left: 1px solid @grayLighter;
@@ -172,13 +178,17 @@ div{
 	}
 }
 
+#push, footer{
+	height: 40px;
+}
+
 footer{
-	height: 100px;
 	background-color: @grayLighter;
-	.footer{
-		text-align: center;
-		color: @gray;
-	}
+	text-align: center;
+	line-height: 40px;
+	font-size: 12px;
+	color: @grayLight;
+	a{color: @grayLight;}
 }
 
 @media (max-width: 767px) {
