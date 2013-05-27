@@ -23,7 +23,7 @@
   padding-left:  20px;
   padding-right: 20px;
   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
-  border-bottom: 1px solid @navbarBorder;
+  //border-bottom: 1px solid @navbarBorder;
   //.border-radius(@baseBorderRadius);
   //.box-shadow(0 1px 4px rgba(0,0,0,.065));
 
@@ -177,10 +177,14 @@
 // -------------------------
 
 .navbar-static-top {
-  position: static;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 0;
   margin-bottom: 0; // remove 18px margin for default navbar
   .navbar-inner {
-    .border-radius(0);
+    //.border-radius(0);
   }
 }
 
@@ -227,7 +231,7 @@
 .navbar-fixed-top,
 .navbar-static-top {
   .navbar-inner {
-    .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+    //.box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
   }
 }
 

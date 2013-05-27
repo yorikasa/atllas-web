@@ -1,9 +1,8 @@
 <%= erb :head, :locals => {title: "アトラス [Atllas] ネットで話題の最新ニュース"} %>
 
-<div class="span6">
+<div class="main-620">
   <% if @urls %>
   <div id="popular" class="section">
-	<span class="section-title">人気ニュース</span>
 	<% @urls.sort_by{|u|
 	   if u.count_recent_hatena
 	     u.count_recent_hatena + u.counted_twitter
@@ -20,23 +19,7 @@
 		  <span><a href="/page/<%= CGI.escape(CGI.escape(url.url)) %>"><%= url.id.generation_time.strftime("%Y年%_m月%e日") %></a></span>
 		</div> <!-- .entry -->
 		<% if i == 5 %>
-			<script type="text/javascript"><!--
-				google_ad_client = "ca-pub-1794767457980402";
-				/* mobile */
-				if (window.innerWidth > 480) {
-					google_ad_slot = "7747074893";
-					google_ad_width = 336;
-					google_ad_height = 280;
-				} else{
-					google_ad_slot = "9524859298";
-					google_ad_width = 320;
-					google_ad_height = 50;
-				}
-				//-->
-			</script>
-			<script type="text/javascript"
-					src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			</script>
+			<!-- adhere -->
 		<% end %>
 	  <% end %>
 	<% end %>
@@ -44,56 +27,59 @@
   <% end %>
 </div> <!-- .span6 -->
 
-<div class="span4">
-  <div id="recents" class="section">
-	<span class="section-title">最新ニュース</span>
-	<% rpoint = rand(0..5) %>
-	  <% @recents.each_with_index do |url, i| %>
-	    <% if url.title %>
-		  <div class="entry <%= url.category.downcase %>">
-			<h2><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h2>
-		  </div>
+<div class="side-336">
+	 	<div class="side-ad">
+		  <script type="text/javascript"><!--
+		  google_ad_client = "ca-pub-1794767457980402";
+		  if (window.innerWidth > 769){
+		  	/* main area */
+		  	google_ad_slot = "7747074893";
+		  	google_ad_width = 336;
+		  	google_ad_height = 280;
+		  }else if(window.innerWidth < 481){
+		  	/* recent area */
+		  	google_ad_slot = "6409942495";
+		  	google_ad_width = 300;
+		  	google_ad_height = 250;
+		  }
+		  //-->
+		  </script>
+		  <script type="text/javascript"
+		  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		  </script>
+	 	</div>
+
+	<span class="section-title">NEW</span>
+ 	<div id="recents" class="section">
+		<% @recents.each_with_index do |url, i| %>
+	    	<% if url.title %>
+			<div class="entry <%= url.category.downcase %>">
+				<h2><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h2>
+		  	</div>
+			<% end %>
 		<% end %>
-	  <% if i == rpoint %>
-	  	  <script type="text/javascript"><!--
-	  	  	google_ad_client = "ca-pub-1794767457980402";
-	  	  	/* mobile */
-	  	  	google_ad_slot = "6409942495";
-	  	  	google_ad_width = 300;
-	  	  	google_ad_height = 250;
-	  	  	//-->
-	  	  </script>
-	  	  <script type="text/javascript"
-	  	  		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	  	  </script>
-	  <% end %>
-	<% end %>
-  </div>
-</div> <!-- .span4 -->
+  	</div>
 
-<div class="span2">
-  <div id="products" class="section">
-	<span class="section-title">話題の商品</span>
-	<% @market.each do |prd| %>
-	  <% if prd.image_url %>
-	    <a href="<%= prd.url %>" target="_blank"><img src="<%= prd.image_url %>" /></a>
-	  <% end %>
-	  <p><a href="<%= prd.url %>" target="_blank"><%= prd.title %></a></p>
-	  <hr>
-	<% end %>
-  </div> <!-- .span2 -->
+  	<span class="section-title">話題の商品</span>
+  	<% @market.each do |prd| %>
+  		<% if prd.image_url %>
+  			<div id="products" class="section">
+  		    	<a href="<%= prd.url %>" target="_blank"><img src="<%= prd.image_url %>" /></a>
+  		    	<p><a href="<%= prd.url %>" target="_blank"><%= prd.title %></a></p>
+  		    </div>
+  		<% end %>
+  	<% end %>
 
-  <div id="videos" class="section">
-	<span class="section-title">話題の動画</span>
-	<% @video.each do |vd| %>
-	<% if /v=(.+?)$/ =~ vd.url %>
-	<% vid = $1 %>
-	<a href="<%= vd.url %>" target="_blank"><img src="http://img.youtube.com/vi/<%= vid %>/0.jpg" /></a>
-	<% end %>
-	<p><a href="<%= vd.url %>"><%= vd.title %></a></p>
-	<hr>
-	<% end %>
-  </div>
-</div> <!-- .span2 -->		  	
+  	<span class="section-title">話題の動画</span>  		
+  	<% @video.each do |vd| %>
+  		<% if /v=(.+?)$/ =~ vd.url %>
+  			<% vid = $1 %>
+  			<div id="videos" class="section">
+  				<a href="<%= vd.url %>" target="_blank"><img src="http://img.youtube.com/vi/<%= vid %>/0.jpg" /></a>
+  				<p><a href="<%= vd.url %>"><%= vd.title %></a></p>
+  			</div>
+  		<% end %>
+  	<% end %>
+</div> <!-- .span4 -->	  	
 
 <%= erb :foot %>

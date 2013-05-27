@@ -1,64 +1,51 @@
 <%= erb :head, :locals => {title: "アトラス [Atllas] : カテゴリー - "+cat_ja} %>
 
-<div class="span7">
+<div class="main-620">
   <% if @urls %>
   <div class="section">
-	<span class="section-title">人気ニュース</span>
-	<% @urls.each_with_index do |url, i| %>
+	<% @urls.each do |url| %>
 		<% if url.title %>
 			<div class="entry <%= cat_en %>">
 			  <h1><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h1>
 			  <p><%= url.body[0,100] if url.body %>...</p>
 			  <span><a href="/page/<%= CGI.escape(CGI.escape(url.url)) %>"><%= url.id.generation_time.strftime	("	%Y年%_m月%e日") %></a></span>
 			</div>
-			<% if i == 5 %>
-				<script type="text/javascript"><!--
-					google_ad_client = "ca-pub-1794767457980402";
-					/* mobile */
-					if (window.innerWidth > 480) {
-						google_ad_slot = "7747074893";
-						google_ad_width = 336;
-						google_ad_height = 280;
-					} else{
-						google_ad_slot = "9524859298";
-						google_ad_width = 320;
-						google_ad_height = 50;
-					}
-					//-->
-				</script>
-				<script type="text/javascript"
-						src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-				</script>
-			<% end %>
 		<% end %>
 	<% end %>
   </div>
   <% end %>
 </div> <!-- .span6 -->
 
-<div class="span4 offset1">
-  <% rpoint = rand(0..5) %>
+<div class="side-336">
+	 	<div class="side-ad">
+		  <script type="text/javascript"><!--
+		  google_ad_client = "ca-pub-1794767457980402";
+		  if (window.innerWidth > 769){
+		  	/* main area */
+		  	google_ad_slot = "7747074893";
+		  	google_ad_width = 336;
+		  	google_ad_height = 280;
+		  }else if(window.innerWidth < 481){
+		  	/* recent area */
+		  	google_ad_slot = "6409942495";
+		  	google_ad_width = 300;
+		  	google_ad_height = 250;
+		  }
+		  //-->
+		  </script>
+		  <script type="text/javascript"
+		  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		  </script>
+	 	</div>
+
   <% if @recents %>
+  <span class="section-title">最新ニュース</span>
   <div class="section">
-	<span class="section-title">最新ニュース</span>
-	<% @recents.each_with_index do |url, i| %>
+	<% @recents.each do |url| %>
 	  <% if url.title %>
 	    <div class="entry <%= cat_en %>">
  		  <h2><a href="<%= url.url %>" target="_blank"><%= url.title %></a></h2>
 		</div>
-	  <% end %>
-	  <% if i == rpoint %>
-	  	<script type="text/javascript"><!--
-	  		google_ad_client = "ca-pub-1794767457980402";
-	  		/* mobile */
-	  		google_ad_slot = "6409942495";
-	  		google_ad_width = 300;
-	  		google_ad_height = 250;
-	  		//-->
-	  	</script>
-	  	<script type="text/javascript"
-	  			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	  	</script>
 	  <% end %>
 	<% end %>
   </div> <!-- .section -->

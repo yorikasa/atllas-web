@@ -5,27 +5,43 @@
 	border-bottom: 5px solid @color;
 }
 .mixin-entry(@color){
-	border-left: 5px solid @color;
+	border-left: 7px solid @color;
 }
 
 html,body{
 	height: 100%;
+	background-color: #f5f5f5;
 }
 
 div{
 	word-break:break-all;
 }
-.brandimg{
-	margin-right: 20px;
+
+.navbar{
+	background-color: white;
+	box-shadow: 0px 1px 3px #aaaaaa;
 }
 
+.navbar-inner{
+	width: 970px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+}
+.brandimg{
+	background-color: orange;
+	margin-right: 20px;
+}
 .nav{
-	.society{.mixin-navbar(@society);}
-	.politic{.mixin-navbar(@politic);}
-	.sport{.mixin-navbar(@sport);}
-	.entertainment{.mixin-navbar(@entertainment);}
-	.tech{.mixin-navbar(@tech);}
-	.fun{.mixin-navbar(@fun);}
+	li{
+		border-bottom: 5px solid @white;
+	}
+	.society:hover{.mixin-navbar(@society);}
+	.politic:hover{.mixin-navbar(@politic);}
+	.sport:hover{.mixin-navbar(@sport);}
+	.entertainment:hover{.mixin-navbar(@entertainment);}
+	.tech:hover{.mixin-navbar(@tech);}
+	.fun:hover{.mixin-navbar(@fun);}
 	object{
 		margin: 16px 10px auto 10px;
 		height: 18px;
@@ -39,24 +55,34 @@ div{
 }
 
 .container{
-	.row{
-		margin-top: 70px;
-		.top.ad{
-			// width: 728px;
-			// height: 90px;
-			margin: 0px auto 20px auto;
+	width: 970px;
+	.top-ad{
+		margin-top:20px;
+	}
+	.rowe{
+		margin-top: 80px;
+		span.section-title{
+			margin: 15px 0 5px 0;
+			padding: 0;
+			font-size: 14px;
+			font-weight: bold;
+			color: @gray;
+			display: inline-block;
+		}
+		.section-title.twitter{
+			min-height: 48px;
+			padding-left: 58px;
+			line-height: 48px;
+			background-repeat: no-repeat;
+			background-position: left center;
+			background-image: url('/images/bird_blue_48.png');
 		}
 
 		.section{
-			margin: 10px 0 20px 0;
-			span.section-title{
-				margin: 0px 0px 10px 0;
-				padding: 6px 10px 6px 0px;
-				font-size: 20px;
-				font-weight: normal;
-				color: @gray;
-				display: inline-block;
-			}
+			background-color: #ffffff;
+			margin: 0px 0 20px 0;
+			box-shadow: 0px 1px 3px #aaaaaa;
+			
 			.entry{
 				padding: 10px 5px 10px 10px;
 				border-bottom: 1px solid @grayLighter;
@@ -64,6 +90,7 @@ div{
 					 font-weight: bold;
 					 font-size: 16px;
 					 line-height: 22px;
+					 a{color: #444444;}
 				}
 				h2{
 					font-weight: bold;
@@ -87,15 +114,8 @@ div{
 			.entertainment{.mixin-entry(@entertainment);}
 			.tech{.mixin-entry(@tech);}
 			.fun{.mixin-entry(@fun);}
-			.section-title.twitter{
-				min-height: 48px;
-				padding-left: 58px;
-				line-height: 48px;
-				background-repeat: no-repeat;
-				background-position: left center;
-				background-image: url('/images/bird_blue_48.png');
-			}
 			.tweet{
+				.mixin-entry(#39a0cd);
 				clear: both;
 				padding: 10px;
 				border-bottom: 1px solid @grayLighter;
@@ -127,7 +147,7 @@ div{
 						p{margin-bottom: 0}
 					}
 					.tweet-meta{
-						visibility: hidden;
+						//visibility: hidden;
 						span{
 							margin-right: 10px;
 							padding-left: 18px;
@@ -158,7 +178,8 @@ div{
 .share{
 	padding-top: 10px;
 	div{
-		margin: 10px 0;
+		margin: 10px 10px;
+		display: inline;
 	}
 }
 
@@ -180,10 +201,10 @@ div{
 
 #push, footer{
 	height: 40px;
+	clear: both;
 }
 
 footer{
-	background-color: @grayLighter;
 	text-align: center;
 	line-height: 40px;
 	font-size: 12px;
@@ -191,12 +212,62 @@ footer{
 	a{color: @grayLight;}
 }
 
+.main-620{
+	width: 620px;
+	float: left;
+}
+
+.side-336{
+	width: 336px;
+	float: right;
+
+	// for products and videoes
+	p{
+		margin: 5px;
+		padding: 5px;
+		a{color: #444444;}
+	}
+}
+
+
+
 @media (max-width: 767px) {
-	.row{
+	.navbar{
+		padding-left: 20px;
+	}
+	.navbar-inner{
+		width: inherit;
+	}
+	.container{
+		width: 100%;
+		.top-ad{
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+	}
+	.rowe{
 		margin-left: -20px;
 		margin-right: -20px;
 	}
 	.tweet-meta{
 		display: none;
+	}
+
+	.main-620{
+		width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+	}
+
+	.side-336{
+		width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+		.side-ad{
+			width: 300px;
+			margin: 0 auto;
+		}
 	}
 }
