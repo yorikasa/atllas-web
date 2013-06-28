@@ -145,27 +145,6 @@ get '/:cat' do
     erb :category, :locals => {cat_en: params[:cat], cat_ja: @categories[params[:cat].to_sym]}
 end
 
-get '/page/:url' do
-    target = Url.where(url: CGI.unescape(CGI.unescape(params[:url]))).first
-    redirect not_found if not target
-    @related = []
-    @nears = []
-    if ttime = target[:created_at]
-        Url.where(created_at: (ttime-3600*6..ttime+3600*6)).desc(:count_all_twitter).limit(30).each do |url|
-            next if target.id == url.id
-            next if url.url.include?('www.nicovideo.jp')
-            @nears << url
-        end
-    end
-    if target[:related]
-        target.related.each do |rid|
-            @related << Url.where(id: rid).first
-        end
-    end
-    erb :individual, :locals => {url: target}
-end
-
-
 get '/*' do
     redirect not_found
 end
