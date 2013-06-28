@@ -2,6 +2,7 @@
 
 <div class="main-620">
   <% if @urls %>
+  <span class="section-title">POPULAR</span>
   <div id="popular" class="section">
 	<% @urls.sort_by{|u|
 	   if u.count_recent_hatena
