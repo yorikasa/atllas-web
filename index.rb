@@ -90,61 +90,6 @@ get '/about' do
     erb :about
 end
 
-get '/:cat' do
-    if not %w(society politic sport entertainment tech fun).include?(params[:cat])
-        redirect not_found
-    end
-    
-    @categories = {society: "社会",
-        politic: "政治経済",
-        sport: "スポーツ",
-        entertainment: "エンタメ",
-        tech: "テクノロジー",
-        fun: "2ch・おもしろ"}
-    @urls = []
-    @recents = []
-    @video = []
-    @app = []
-    @market = []
-
-    count = 0
-    Url.where(category: params[:cat].capitalize).limit(100).desc(:counted_twitter).each do |url|
-        if /youtube\.com|www\.nicovideo\.jp/ =~ url.url
-            @video << url
-            next
-        end
-        if /play\.google\.com|itunes\.apple\.com/ =~ url.url
-            @app << url
-            next
-        end
-        if /amazon\.co\.jp|rakuten\.co\.jp/ =~ url.url
-            @market << url
-            next
-        end
-        count += 1
-        @urls << url if count < 30
-    end
-
-    count = 0
-    Url.where(category: params[:cat].capitalize).limit(50).desc(:counting_twitter).each do |url|
-        if /youtube\.com|www\.nicovideo\.jp/ =~ url.url
-            @video << url
-            next
-        end
-        if /play\.google\.com|itunes\.apple\.com/ =~ url.url
-            @app << url
-            next
-        end
-        if /amazon\.co\.jp|rakuten\.co\.jp/ =~ url.url
-            @market << url
-            next
-        end
-        count += 1
-        @recents << url if count < 30
-    end
-    erb :category, :locals => {cat_en: params[:cat], cat_ja: @categories[params[:cat].to_sym]}
-end
-
 get '/*' do
     redirect not_found
 end

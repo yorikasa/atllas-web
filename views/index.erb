@@ -37,27 +37,4 @@
 			<% end %>
 		<% end %>
   	</div>
-
-  	<span class="section-title">話題の商品</span>
-  	<% @market.each do |prd| %>
-  		<% if prd.image_url %>
-  			<div id="products" class="section">
-  		    	<a href="<%= prd.url %>" target="_blank"><img src="<%= prd.image_url %>" /></a>
-  		    	<p><a href="<%= prd.url %>" target="_blank"><%= prd.title %></a></p>
-  		    </div>
-  		<% end %>
-  	<% end %>
-
-  	<span class="section-title">話題の動画</span>  		
-  	<% @video.each do |vd| %>
-  		<% if /v=(.+?)$/ =~ vd.url %>
-  			<% vid = $1 %>
-  			<div id="videos" class="section">
-  				<a href="<%= vd.url %>" target="_blank"><img src="http://img.youtube.com/vi/<%= vid %>/0.jpg" /></a>
-  				<p><a href="<%= vd.url %>"><%= vd.title %></a></p>
-  			</div>
-  		<% end %>
-  	<% end %>
-</div> <!-- .span4 -->	  	
-
 <%= erb :foot %>
